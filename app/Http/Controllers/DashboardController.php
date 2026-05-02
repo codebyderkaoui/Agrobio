@@ -26,7 +26,7 @@ class DashboardController extends Controller
         $priorityTasks = Task::with('assignee')
             ->where('is_done', false)
             ->orderByRaw("FIELD(priority, 'high', 'med', 'low')")
-            ->limit(6)
+            ->limit(7)
             ->get();
 
         // ── Recent orders ──────────────────────────
