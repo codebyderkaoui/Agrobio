@@ -14,17 +14,23 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
 
+        // ── Allow API routes to read the session ──────────────────────────
+        $middleware->api(append: [
+            \Illuminate\Cookie\Middleware\EncryptCookies::class,
+            \Illuminate\Session\Middleware\StartSession::class,
+        ]);
+
         // ── API: return JSON 401 instead of redirect ──────────────────────
         $middleware->redirectGuestsTo(function (Request $request) {
             if ($request->expectsJson() || $request->is('api/*')) {
-                return null; // handled by EnsureApiAuthenticated middleware
+                return null;
             }
             return route('login');
         });
 
         // ── Custom middleware aliases ─────────────────────────────────────
         $middleware->alias([
-            'admin' => \App\Http\Middleware\AdminMiddleware::class,
+            'admin'    => \App\Http\Middleware\AdminMiddleware::class,
             'api.auth' => \App\Http\Middleware\EnsureApiAuthenticated::class,
         ]);
 
