@@ -21,25 +21,21 @@ Route::middleware('auth')->group(function () {
     Route::get   ('/products',          [ProductController::class, 'apiIndex']);
     Route::post  ('/products',          [ProductController::class, 'apiStore']);
     Route::put   ('/products/{product}', [ProductController::class, 'apiUpdate']);
-    Route::delete('/products/{product}', [ProductController::class, 'apiDestroy']);
 
     // ── Orders ────────────────────────────────────
     Route::get   ('/orders',               [OrderController::class, 'apiIndex']);
     Route::post  ('/orders',               [OrderController::class, 'apiStore']);
     Route::patch ('/orders/{order}/advance',[OrderController::class, 'apiAdvance']);
-    Route::delete('/orders/{order}',       [OrderController::class, 'apiDestroy']);
 
     // ── Tasks ─────────────────────────────────────
     Route::get   ('/tasks',         [TaskController::class, 'apiIndex']);
     Route::post  ('/tasks',         [TaskController::class, 'apiStore']);
     Route::patch ('/tasks/{task}',  [TaskController::class, 'apiUpdate']);
-    Route::delete('/tasks/{task}',  [TaskController::class, 'apiDestroy']);
 
     // ── Projects ──────────────────────────────────
     Route::get   ('/projects',            [ProjectController::class, 'apiIndex']);
     Route::post  ('/projects',            [ProjectController::class, 'apiStore']);
     Route::patch ('/projects/{project}',  [ProjectController::class, 'apiUpdate']);
-    Route::delete('/projects/{project}',  [ProjectController::class, 'apiDestroy']);
 
     // ── Analytics ─────────────────────────────────
     Route::get('/analytics/summary',      [AnalyticsController::class, 'summary']);
@@ -47,5 +43,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/analytics/top-products', [AnalyticsController::class, 'topProducts']);
     Route::get('/analytics/top-farms',    [AnalyticsController::class, 'topFarms']);
     Route::get('/analytics/categories',   [AnalyticsController::class, 'categories']);
+
+});
+
+Route::middleware(['auth', 'admin'])->group(function () {
+        Route::delete('/products/{product}', [ProductController::class, 'apiDestroy']);
+        Route::delete('/orders/{order}',     [OrderController::class, 'apiDestroy']);
+        Route::delete('/tasks/{task}',       [TaskController::class, 'apiDestroy']);
+        Route::delete('/projects/{project}', [ProjectController::class, 'apiDestroy']); 
 
 });
