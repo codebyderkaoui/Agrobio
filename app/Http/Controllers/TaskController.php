@@ -87,8 +87,7 @@ class TaskController extends Controller
         // Auto-sync is_done with column
         if (isset($data['column'])) {
             $data['is_done'] = ($data['column'] === 'done');
-        }
-        if (isset($data['is_done'])) {
+        } elseif (isset($data['is_done'])) {
             $data['column'] = $data['is_done'] ? 'done' : ($task->column === 'done' ? 'todo' : $task->column);
         }
 
