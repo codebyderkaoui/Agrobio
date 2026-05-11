@@ -51,7 +51,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 .nav-icon-btn{width:36px;height:36px;border-radius:9px;border:1.5px solid var(--border);background:var(--white);display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative;transition:all var(--transition);color:var(--gr600)}
 .nav-icon-btn:hover{background:var(--gr50);border-color:var(--border2);color:var(--g600)}
 .notif-dot{width:8px;height:8px;background:var(--c400);border-radius:50%;position:absolute;top:5px;right:5px;border:2px solid var(--white)}
-.cart-count{min-width:18px;height:18px;padding:0 4px;background:var(--g400);border-radius:9px;position:absolute;top:-5px;right:-5px;font-size:9px;font-weight:700;color:#fff;display:flex;align-items:center;justify-content:center;border:2px solid var(--white)}
+
 .avatar-nav{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--g100),var(--g200));display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:var(--g800);cursor:pointer;border:2px solid var(--g200);box-shadow:0 0 0 2px var(--white);transition:all var(--transition)}
 .notif-panel{position:absolute;top:calc(100% + 10px);right:0;width:320px;background:var(--white);border:1px solid var(--border2);border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);z-index:300;display:none;overflow:hidden}
 .notif-panel.open{display:block}
@@ -170,10 +170,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 .product-footer{display:flex;justify-content:space-between;align-items:center}
 .product-price{font-size:16px;font-weight:600;color:var(--g800);line-height:1}
 .product-unit{font-size:10.5px;color:var(--gr400);margin-top:1px}
-.add-btn{width:30px;height:30px;border-radius:8px;background:var(--g400);border:none;color:#fff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all var(--transition);line-height:1}
-.add-btn:hover{background:var(--g500);transform:scale(1.08)}
-.add-btn.in-cart{background:var(--t400)}
-.add-btn:disabled{background:var(--gr200);cursor:not-allowed;transform:none}
+
 .product-grid.list-view .product-card{display:flex;align-items:center}
 .product-grid.list-view .product-img{width:80px;height:70px;flex-shrink:0;border-radius:0}
 .product-grid.list-view .product-body{flex:1;padding:.75rem 1rem;display:flex;align-items:center;gap:1rem}
@@ -225,36 +222,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 .proj-pct-g{color:var(--g600);font-weight:600}.proj-pct-a{color:var(--a600);font-weight:600}.proj-pct-t{color:var(--t600);font-weight:600}
 .proj-meta{display:flex;justify-content:space-between;align-items:center;margin-top:1rem}
 .proj-date{font-size:11px;color:var(--gr400)}
-.cart-overlay{position:fixed;inset:0;background:rgba(44,44,42,.4);z-index:400;display:none;align-items:stretch;justify-content:flex-end;backdrop-filter:blur(2px)}
-.cart-overlay.open{display:flex}
-.cart-drawer{width:380px;max-width:95vw;background:var(--white);display:flex;flex-direction:column;box-shadow:-8px 0 32px rgba(0,0,0,.15)}
-.cart-header{padding:1.4rem 1.5rem;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
-.cart-title-wrap{display:flex;align-items:center;gap:10px}
-.cart-title{font-family:'Playfair Display',serif;font-size:19px;font-weight:600;color:var(--g900)}
-.cart-close{width:32px;height:32px;border-radius:8px;border:1.5px solid var(--border);background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--gr600);transition:all var(--transition)}
-.cart-items{flex:1;overflow-y:auto;padding:1rem 1.5rem}
-.cart-empty{text-align:center;padding:2.5rem 1rem;color:var(--gr400);line-height:1.7;font-size:13px}
-.cart-item{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--gr50)}
-.cart-item:last-child{border-bottom:none}
-.cart-item-img{width:48px;height:48px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
-.cart-item-info{flex:1;min-width:0}
-.cart-item-name{font-size:13px;font-weight:500;color:var(--g900)}
-.cart-item-farm{font-size:11px;color:var(--gr400);margin:1px 0 7px}
-.cart-item-controls{display:flex;align-items:center;gap:7px}
-.qty-btn{width:24px;height:24px;border-radius:6px;border:1.5px solid var(--border);background:var(--white);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:15px;color:var(--gr600);transition:all var(--transition)}
-.qty-btn:hover{border-color:var(--g300);background:var(--g50);color:var(--g600)}
-.qty-num{font-size:13px;font-weight:600;min-width:18px;text-align:center}
-.remove-item{background:none;border:none;cursor:pointer;font-size:13px;color:var(--gr400);padding:4px;border-radius:5px;transition:all var(--transition)}
-.remove-item:hover{color:var(--c400);background:var(--c50)}
-.cart-item-price{font-size:13px;font-weight:600;color:var(--g800);flex-shrink:0}
-.cart-footer{padding:1.25rem 1.5rem;border-top:1px solid var(--border);background:var(--white)}
-.cart-total{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
-.cart-total-label{font-size:13px;color:var(--gr600)}
-.cart-total-val{font-size:22px;font-weight:600;color:var(--g900)}
-.cart-fee-row{display:flex;justify-content:space-between;font-size:12px;color:var(--gr400);margin-bottom:5px}
-.cart-subtotals{margin-bottom:1rem}
-.checkout-btn{width:100%;padding:12px;font-size:14px;font-weight:600;background:linear-gradient(135deg,var(--g400),var(--g500));color:#fff;border:none;border-radius:10px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all var(--transition)}
-.checkout-btn:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(63,109,17,.4)}
+
 .modal-overlay{position:fixed;inset:0;background:rgba(44,44,42,.45);z-index:500;display:none;align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(3px)}
 .modal-overlay.open{display:flex}
 .modal{background:var(--white);border-radius:var(--radius-lg);width:100%;max-width:480px;box-shadow:var(--shadow-lg);overflow:hidden}
@@ -329,10 +297,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
         <div class="notif-item"><div class="notif-dot-item" style="background:var(--a400)"></div><div><div class="notif-text">Domaine Souissi — contrat à renouveler dans 30j</div><div class="notif-time">Hier</div></div></div>
       </div>
     </div>
-    <div class="nav-icon-btn" id="cart-toggle-btn" title="Panier" style="position:relative">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 001.95-1.56l1.65-7.44H6"/></svg>
-      <div class="cart-count" id="cart-badge">0</div>
-    </div>
+
     <div class="avatar-nav" title="{{ auth()->user()->name }}">{{ auth()->user()->initials }}</div>
   </div>
 </nav>
@@ -369,10 +334,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
         Commandes
         <span class="sbadge" id="orders-badge-sb">{{ \App\Models\Order::byStatus('Nouveau')->count() }}</span>
       </a>
-      <div class="sidebar-item" id="cart-sidebar-btn">
-        <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 001.95-1.56l1.65-7.44H6"/></svg>
-        Panier <span class="sbadge green" id="cart-badge-sb">0</span>
-      </div>
+
     </div>
     <div class="sidebar-divider"></div>
     <div class="sidebar-section">
@@ -407,36 +369,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
   <main class="content">
     @yield('content')
   </main>
-</div>
-
-{{-- CART DRAWER --}}
-<div class="cart-overlay" id="cart-overlay">
-  <div class="cart-drawer">
-    <div class="cart-header">
-      <div class="cart-title-wrap">
-        <div class="cart-title">🛒 Panier</div>
-        <div class="cart-count" id="cart-badge-drawer" style="position:relative;top:auto;right:auto">0</div>
-      </div>
-      <button class="cart-close" id="cart-close-btn">✕</button>
-    </div>
-    <div class="cart-items" id="cart-items-list">
-      <div class="cart-empty">
-        <span style="font-size:36px;display:block;margin-bottom:.75rem">🌿</span>
-        Votre panier est vide<br><small>Explorez notre catalogue de produits bio</small>
-      </div>
-    </div>
-    <div class="cart-footer" id="cart-footer" style="display:none">
-      <div class="cart-subtotals">
-        <div class="cart-fee-row"><span>Sous-total</span><span id="cart-subtotal-val">0 MAD</span></div>
-        <div class="cart-fee-row"><span>Livraison</span><span style="color:var(--t600)">Gratuit</span></div>
-      </div>
-      <div class="cart-total">
-        <div class="cart-total-label">Total</div>
-        <div class="cart-total-val" id="cart-total-val">0 MAD</div>
-      </div>
-      <button class="checkout-btn" id="checkout-btn">Passer la commande →</button>
-    </div>
-  </div>
 </div>
 
 {{-- MODAL --}}
@@ -499,81 +431,6 @@ document.addEventListener('click', e => {
     }
 });
 
-// ── Cart ─────────────────────────────────────────────────────────────────
-let cart = {};
-
-function toggleCart() {
-    const ov = document.getElementById('cart-overlay');
-    ov.classList.toggle('open');
-    if (ov.classList.contains('open')) renderCartDrawer();
-}
-document.getElementById('cart-toggle-btn').addEventListener('click', toggleCart);
-document.getElementById('cart-sidebar-btn')?.addEventListener('click', toggleCart);
-document.getElementById('cart-close-btn').addEventListener('click', toggleCart);
-document.getElementById('cart-overlay').addEventListener('click', e => {
-    if (e.target === document.getElementById('cart-overlay')) toggleCart();
-});
-
-function updateCartUI() {
-    const total = Object.values(cart).reduce((a, b) => a + b, 0);
-    document.getElementById('cart-badge').textContent = total;
-    document.getElementById('cart-badge-sb').textContent = total;
-    document.getElementById('cart-badge-drawer').textContent = total;
-}
-
-function renderCartDrawer() {
-    const el     = document.getElementById('cart-items-list');
-    const footer = document.getElementById('cart-footer');
-    const keys   = Object.keys(cart);
-    if (keys.length === 0) {
-        el.innerHTML = `<div class="cart-empty"><span style="font-size:36px;display:block;margin-bottom:.75rem">🌿</span>Votre panier est vide<br><small>Explorez notre catalogue de produits bio</small></div>`;
-        footer.style.display = 'none'; return;
-    }
-    footer.style.display = 'block';
-    let total = 0;
-    el.innerHTML = keys.map(pid => {
-        const p = window._products?.find(x => x.id == pid); if (!p) return '';
-        const qty = cart[pid], sub = p.price * qty; total += sub;
-        return `<div class="cart-item">
-          <div class="cart-item-img ${p.bg_class}">${p.emoji}</div>
-          <div class="cart-item-info">
-            <div class="cart-item-name">${p.name}</div>
-            <div class="cart-item-farm">${p.farm?.name || ''}</div>
-            <div class="cart-item-controls">
-              <button class="qty-btn" onclick="changeQty(${pid},-1)">−</button>
-              <span class="qty-num">${qty}</span>
-              <button class="qty-btn" onclick="changeQty(${pid},1)">+</button>
-              <button class="remove-item" onclick="removeFromCart(${pid})">✕</button>
-            </div>
-          </div>
-          <div class="cart-item-price">${sub.toLocaleString('fr-FR')} MAD</div>
-        </div>`;
-    }).join('');
-    document.getElementById('cart-subtotal-val').textContent = total.toLocaleString('fr-FR') + ' MAD';
-    document.getElementById('cart-total-val').textContent    = total.toLocaleString('fr-FR') + ' MAD';
-}
-
-function addToCart(pid) {
-    const p = window._products?.find(x => x.id == pid);
-    if (!p || p.stock_status === 'out') return;
-    cart[pid] = (cart[pid] || 0) + 1;
-    updateCartUI();
-    if (typeof renderProducts === 'function') renderProducts();
-    showToast(`🛒 ${p.name} ajouté`);
-}
-function removeFromCart(pid) { delete cart[pid]; updateCartUI(); renderCartDrawer(); if (typeof renderProducts === 'function') renderProducts(); }
-function changeQty(pid, d) { const n = (cart[pid] || 0) + d; if (n <= 0) removeFromCart(pid); else { cart[pid] = n; updateCartUI(); renderCartDrawer(); } }
-
-document.getElementById('checkout-btn').addEventListener('click', async () => {
-    if (!Object.keys(cart).length) return;
-    const items = Object.entries(cart).map(([product_id, quantity]) => ({ product_id: parseInt(product_id), quantity }));
-    try {
-        await apiRequest('POST', '/orders', { client_name: 'Commande en ligne', delivery_mode: 'Standard', items });
-        cart = {}; updateCartUI(); toggleCart();
-        showToast('🎉 Commande passée avec succès !');
-    } catch (e) { showToast('❌ ' + e.message); }
-});
-
 // ── Modal helpers ─────────────────────────────────────────────────────────
 function openModal(title, html, onSave) {
     document.getElementById('modal-title-text').textContent = title;
@@ -611,7 +468,7 @@ document.addEventListener('keydown', e => {
     if (e.key === 'Escape') {
         closeModal();
         document.getElementById('notif-panel')?.classList.remove('open');
-        document.getElementById('cart-overlay')?.classList.remove('open');
+
     }
 });
 

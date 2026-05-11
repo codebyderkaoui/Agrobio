@@ -89,31 +89,24 @@ function renderProducts() {
     }
 
     el.innerHTML = prods.map(p => {
-        const inCart     = (window.cart || {})[p.id] > 0;
         const stockLabel = p.stock_status === 'ok' ? 'En stock' : p.stock_status === 'low' ? 'Stock bas' : 'Rupture';
         const stockClass = p.stock_status === 'ok' ? 'sb-ok'    : p.stock_status === 'low' ? 'sb-low'    : 'sb-out';
         return `<div class="product-card">
-          <div class="product-img ${p.bg_class}">
-            ${p.emoji}
-            <div class="stock-badge ${stockClass}">${stockLabel}</div>
-          </div>
-          <div class="product-body">
-            <div class="product-name">${p.name}</div>
-            <div class="product-farm">${p.farm?.name || ''} · ${p.farm?.city || 'Maroc'}</div>
-            <div class="product-footer">
-              <div>
-                <div class="product-price">${p.price} MAD</div>
-                <div class="product-unit">/ ${p.unit}</div>
-              </div>
-              <button class="add-btn${inCart ? ' in-cart' : ''}"
-                      onclick="addToCart(${p.id})"
-                      ${p.stock_status === 'out' ? 'disabled' : ''}
-                      title="${inCart ? 'Dans le panier' : 'Ajouter au panier'}">
-                ${inCart ? '✓' : '+'}
-              </button>
-            </div>
-          </div>
-        </div>`;
+                  <div class="product-img ${p.bg_class}">
+                    ${p.emoji}
+                    <div class="stock-badge ${stockClass}">${stockLabel}</div>
+                  </div>
+                  <div class="product-body">
+                    <div class="product-name">${p.name}</div>
+                    <div class="product-farm">${p.farm?.name || ''} · ${p.farm?.city || 'Maroc'}</div>
+                    <div class="product-footer">
+                      <div>
+                        <div class="product-price">${p.price} MAD</div>
+                        <div class="product-unit">/ ${p.unit}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>`;
     }).join('');
 }
 
