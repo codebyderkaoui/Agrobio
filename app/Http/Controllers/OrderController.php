@@ -11,7 +11,7 @@ use Illuminate\Http\JsonResponse;
 
 class OrderController extends Controller
 {
-    // ── Web view ──────────────────────────────────
+    // ── Web view ──────────────────────────────────────────────────────────────
 
     public function index()
     {
@@ -24,7 +24,7 @@ class OrderController extends Controller
         return view('orders.index', compact('stats'));
     }
 
-    // ── REST API ──────────────────────────────────
+    // ── REST API ──────────────────────────────────────────────────────────────
 
     /**
      * GET /api/orders
@@ -70,12 +70,12 @@ class OrderController extends Controller
             'created_by'       => auth()->id(),
         ]);
 
-        // Create line items if provided
         if (!empty($data['items'])) {
             foreach ($data['items'] as $item) {
                 $product   = Product::findOrFail($item['product_id']);
-                $qty       = $item['quantity'];
-                $unitPrice = $product->price;
+                $qty       = (int) $item['quantity'];
+                $unitPrice = (float) $product->price;
+
                 OrderItem::create([
                     'order_id'   => $order->id,
                     'product_id' => $product->id,
@@ -86,7 +86,6 @@ class OrderController extends Controller
             }
             $order->recalculateTotal();
         } elseif (isset($data['total_amount'])) {
-            // Quick order without item breakdown
             $order->total_amount = $data['total_amount'];
             $order->save();
         }
@@ -96,12 +95,11 @@ class OrderController extends Controller
 
     /**
      * PATCH /api/orders/{id}/advance
-     * Moves order to next status in the flow
      */
     public function apiAdvance(Order $order): JsonResponse
     {
         if (!$order->canAdvance()) {
-            return response()->json(['message' => 'Order cannot be advanced.'], 422);
+            return response()->json(['message' => 'Cette commande ne peut pas être avancée.'], 422);
         }
         $order->advance();
         return response()->json($order);
@@ -113,6 +111,6 @@ class OrderController extends Controller
     public function apiDestroy(Order $order): JsonResponse
     {
         $order->delete();
-        return response()->json(['message' => 'Order deleted.']);
+        return response()->json(['message' => 'Commande supprimée.']);
     }
 }

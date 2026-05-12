@@ -399,8 +399,18 @@ async function apiRequest(method, url, data = null) {
     };
     if (data) opts.body = JSON.stringify(data);
     const res  = await fetch(API_BASE + url, opts);
-    const json = await res.json();
-    if (!res.ok) throw new Error(json.message || 'Erreur serveur');
+    let json = null;
+    try { json = await res.json(); } catch (_) {}
+    if (!res.ok) {
+        // Laravel 422: validation errors come in json.errors, not json.message
+        if (res.status === 422 && json?.errors) {
+            const first = Object.values(json.errors)[0];
+            throw new Error(Array.isArray(first) ? first[0] : first);
+        }
+        if (res.status === 419) throw new Error('Session expirée — rechargez la page.');
+        if (res.status === 401) { window.location.href = '/login'; throw new Error('Non authentifié.'); }
+        throw new Error(json?.message || `Erreur ${res.status}`);
+    }
     return json;
 }
 
