@@ -1,58 +1,113 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🌿 AgroBio — Plateforme de Gestion Interne
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Plateforme interne de gestion pour une coopérative agricole bio. Permet de gérer les fermes partenaires, le catalogue produits, les commandes, les tâches, les projets et d'analyser les ventes.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Stack technique
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+| Couche | Technologie |
+|--------|-------------|
+| Backend | Laravel 13.5 / PHP 8.4 |
+| Base de données | MySQL 8 |
+| Frontend | Blade + Vanilla JS + CSS inline |
+| Auth | Session-based (sans Sanctum) |
+| Polices | Playfair Display, DM Sans (Google Fonts) |
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## Fonctionnalités
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- **Tableau de bord** — KPIs, graphique des ventes, tâches prioritaires, top fermes, commandes récentes
+- **Catalogue Bio** — produits par ferme avec filtres, statut stock, vue grille/liste
+- **Commandes** — création, statuts (Nouveau / En cours / Livré / Annulé), modes de livraison
+- **Fermes Partenaires** — infos contact, certification bio, statut contrat, produits par ferme
+- **Clients** — dérivés des commandes, historique par client, filtres
+- **Tâches** — Kanban drag & drop, priorités, assignation, échéances
+- **Projets** — gestion de projets avec membres (pivot `project_user`)
+- **Analytics** — graphiques ventes hebdo/mensuel
+- **Auth** — login, register, logout, rôles (admin / manager / staff)
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+## Structure de la base de données
 
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
-
-```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+```
+users           — rôles : admin / manager / staff
+farms           — fermes partenaires, certification bio, contrat
+products        — liés à une ferme, stock, catégorie, prix
+orders          — numéro unique CMD-xxx, client, livraison, statut
+order_items     — produits d'une commande (prix au moment de la commande)
+projects        — statut, dates
+project_user    — pivot membres/projets
+tasks           — priorité, catégorie, assignation, Kanban
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+---
 
-## Contributing
+## Installation
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+git clone https://github.com/codebyderkaoui/Agrobio
+cd agrobio
 
-## Code of Conduct
+cp .env.example .env
+# Renseigner DB_DATABASE, DB_USERNAME, DB_PASSWORD dans .env
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+composer install
+php artisan key:generate
+php artisan migrate:fresh --seed
+php artisan serve
+```
 
-## Security Vulnerabilities
+Accéder à : [http://127.0.0.1:8000](http://127.0.0.1:8000)
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+---
 
-## License
+## Compte de démonstration
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+| Champ | Valeur |
+|-------|--------|
+| Email | ahmed@agrobio.ma |
+| Mot de passe | password |
+| Rôle | Admin |
+
+---
+
+## Architecture notable
+
+- **Pas de Sanctum** — les routes API lisent la session via `StartSession` ajouté dans `bootstrap/app.php`
+- **Pas de panier** — application interne, le staff crée les commandes directement
+- **Pas de table clients** — les clients sont dérivés des champs `client_name / client_email / client_phone` des commandes
+- **Soft deletes** sur `products`, `orders`, `projects`, `tasks` — préserve l'historique
+- **Tout le CSS** est inline dans `layouts/app.blade.php`, sans étape de build
+- **Numéros de commande** générés avec une boucle `do/while` pour éviter les doublons (format `CMD-xxx`)
+
+---
+
+## Routes principales
+
+### Web (protégées par auth)
+| Route | Vue |
+|-------|-----|
+| `/` | Tableau de bord |
+| `/products` | Catalogue Bio |
+| `/orders` | Commandes |
+| `/farms` | Fermes Partenaires |
+| `/clients` | Clients |
+| `/tasks` | Tâches (Kanban) |
+| `/projects` | Projets |
+| `/analytics` | Analytics |
+
+### API REST (`/api/...`)
+19 endpoints — produits, commandes, tâches, projets, fermes, clients, analytics.
+Les routes DELETE sont réservées aux admins.
+
+---
+
+## Lancer le projet
+
+```bash
+cd agrobio
+php artisan serve
+```
