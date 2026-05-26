@@ -6,6 +6,8 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\AnalyticsController;
+use App\Http\Controllers\FarmController;
+use App\Http\Controllers\ClientController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +45,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/analytics/top-products', [AnalyticsController::class, 'topProducts']);
     Route::get('/analytics/top-farms',    [AnalyticsController::class, 'topFarms']);
     Route::get('/analytics/categories',   [AnalyticsController::class, 'categories']);
+
+    // ── farms and clients ─────────────────────────────────
+    Route::get('/farms',                       [FarmController::class,  'apiIndex']);
+    Route::get('/clients/{name}/orders',       [ClientController::class, 'orders']);
 
 });
 

@@ -334,6 +334,15 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
         Commandes
         <span class="sbadge" id="orders-badge-sb">{{ \App\Models\Order::byStatus('Nouveau')->count() }}</span>
       </a>
+      <a class="sidebar-item {{ request()->routeIs('farms.index') ? 'active' : '' }}" href="{{ route('farms.index') }}">
+        <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Fermes
+        <span class="sbadge green" id="farms-badge-sb">{{ \App\Models\Farm::where('is_active',true)->count() }}</span>
+      </a>
+      <a class="sidebar-item {{ request()->routeIs('clients.index') ? 'active' : '' }}" href="{{ route('clients.index') }}">
+        <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        Clients
+      </a>
 
     </div>
     <div class="sidebar-divider"></div>
@@ -345,14 +354,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
       </a>
     </div>
     <div class="sidebar-bottom">
-      <div class="season-box">
-        <div style="font-size:22px;margin-bottom:.4rem">🌱</div>
-        <div style="font-size:12px;font-weight:600;color:var(--g800);margin-bottom:2px">Printemps 2026</div>
-        <div style="font-size:11px;color:var(--g600);margin-bottom:9px">Saison des légumes primeurs</div>
-        <div style="font-size:11px;color:var(--gr400);margin-bottom:5px">Récoltes planifiées</div>
-        <div class="progress-bar"><div class="progress-fill" style="width:68%"></div></div>
-        <div style="font-size:11px;color:var(--g600);margin-top:5px;font-weight:500">68% complétées</div>
-      </div>
       <div style="padding:.75rem 0 0;border-top:1px solid var(--border);margin-top:.75rem">
         <form method="POST" action="{{ route('logout') }}" style="margin:0">
           @csrf

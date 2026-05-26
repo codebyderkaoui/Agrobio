@@ -8,6 +8,8 @@ use App\Http\Controllers\TaskController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\AnalyticsController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\FarmController;
+use App\Http\Controllers\ClientController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,5 +35,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/tasks',     [TaskController::class,      'index'])->name('tasks.index');
     Route::get('/projects',  [ProjectController::class,   'index'])->name('projects.index');
     Route::get('/analytics', [AnalyticsController::class, 'index'])->name('analytics.index');
+    Route::get('/farms',   [FarmController::class,  'index'])->name('farms.index');
+    Route::get('/clients', [ClientController::class, 'index'])->name('clients.index');
 
 });
